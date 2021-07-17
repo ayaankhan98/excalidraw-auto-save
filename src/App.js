@@ -43,13 +43,16 @@ export default function App() {
     });
     let formData = new FormData();
     formData.append("file", myFile);
-    console.log(formData);
-    await axios.post(process.env.REACT_APP_SERVER_UPLOAD_ENDPOINT, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        "Access-Control-Allow-Origin": "*"
-      }
-    });
+    try {
+      await axios.post(process.env.REACT_APP_SERVER_UPLOAD_ENDPOINT, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          "Access-Control-Allow-Origin": "*"
+        }
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   const upload = async (elements, state) => {
